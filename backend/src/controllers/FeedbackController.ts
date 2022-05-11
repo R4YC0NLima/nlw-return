@@ -10,13 +10,18 @@ class FeedbackController
   {
     const {type, comment, screenshot} = request.body;
 
-    const prismaFeedbacksRepository = new PrismaFeedbacksRepository()
-    const nodemailerMailAdapter     = new NodemailerMailAdapter()
-    const submitFeedbackUseCase     = new SubmitFeedbackUseCase(prismaFeedbacksRepository, nodemailerMailAdapter)
-
-    await submitFeedbackUseCase.execute({ type, comment, screenshot })
-
-    return response.status(201).send()
+    try {
+      const prismaFeedbacksRepository = new PrismaFeedbacksRepository()
+      const nodemailerMailAdapter     = new NodemailerMailAdapter()
+      const submitFeedbackUseCase     = new SubmitFeedbackUseCase(prismaFeedbacksRepository, nodemailerMailAdapter)
+  
+      await submitFeedbackUseCase.execute({ type, comment, screenshot })
+  
+      return response.status(201).send()
+    } catch {
+      return response.status(500).send()
+    }
+    
   }
 }
 
