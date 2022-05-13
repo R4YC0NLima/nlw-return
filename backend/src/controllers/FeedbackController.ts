@@ -6,7 +6,7 @@ import { SubmitFeedbackUseCase } from "../useCases/SubmitFeedbackUseCase";
 
 class FeedbackController
 {
-  async handle(request: Request, response: Response)
+  async create(request: Request, response: Response)
   {
     const {type, comment, screenshot} = request.body;
 

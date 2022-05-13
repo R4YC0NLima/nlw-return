@@ -5,6 +5,6 @@ const router = Router();
 
 const feedbackController = new FeedbackController();
 
-router.post('/feedbacks', feedbackController.handle)
+router.post('/feedbacks', feedbackController.create)
 
 export { router };
